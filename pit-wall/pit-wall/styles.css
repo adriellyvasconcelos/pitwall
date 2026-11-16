@@ -1,0 +1,191 @@
+/* DESAFIO PIT WALL — HTML + CSS | SENAI — LIMA */
+:root {
+  --black: #0b0b0f;
+  --panel: #16161d;
+  --red: #e10600;
+  --white: #f5f5f7;
+  --muted: #858592;
+  --line: #2b2b35;
+  --ferrari: #e80036;
+  --mclaren: #ff8700;
+  --mercedes: #28d7b5;
+  --audi: #a2a2ad;
+  --font: 'Titillium Web', 'Segoe UI', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: var(--font); line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+button, select { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* 1. Topo em flex */
+.topbar {
+  min-height: 76px; padding: 0 4%; display: flex; align-items: center;
+  justify-content: space-between; gap: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.logo { font-size: 1.45rem; font-style: italic; font-weight: 900; letter-spacing: -.07em; line-height: 1; }
+.logo span, .footer span { color: var(--red); }
+.menu { display: flex; align-items: center; gap: 34px; }
+.menu a {
+  color: #b1b1bb; font-size: .78rem; letter-spacing: .1em;
+  text-transform: uppercase; transition: color .2s;
+}
+.menu a:hover { color: var(--white); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 45px; padding: 0 25px; border: 2px solid transparent;
+  font-size: .77rem; font-weight: 800; text-align: center;
+  text-transform: uppercase; letter-spacing: .025em;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--red); color: white; border-color: var(--red); }
+.btn-primary:hover { background: #bb0702; border-color: #bb0702; }
+.btn-outline { background: transparent; color: var(--white); border-color: var(--white); }
+.btn-outline:hover { background: var(--white); color: var(--black); }
+
+/* 2. Hero com foto enquadrada e faixa inclinada */
+.hero {
+  position: relative; overflow: hidden;
+  min-height: 448px; display: flex; justify-content: space-between;
+  align-items: flex-end; gap: 20px; padding: 70px 4% 59px;
+  background:
+    linear-gradient(110deg,
+      var(--black) 0%,
+      var(--black) 58.4%,
+      var(--red) 58.4%,
+      var(--red) 61.2%,
+      rgba(11,11,15,.18) 61.2%,
+      rgba(11,11,15,.18) 100%),
+    url("img/piloto.jpg") 72% 44% / cover no-repeat,
+    var(--black);
+}
+.hero-content { max-width: 515px; align-self: center; position: relative; z-index: 1; }
+.eyebrow { color: var(--red); font-size: .72rem; font-weight: 800; letter-spacing: .23em; text-transform: uppercase; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(3.8rem, 6.7vw, 6.9rem); font-weight: 900; font-style: italic; letter-spacing: -.06em; line-height: .9; }
+.hero h1 span { display: block; color: var(--red); white-space: nowrap; }
+.hero-description { max-width: 430px; margin-top: 25px; color: #9a9aa5; font-size: .94rem; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; }
+.track-info { display: flex; justify-content: flex-end; align-items: flex-end; flex-shrink: 0; position: relative; z-index: 1; }
+.info { min-width: 94px; border-left: 1px solid rgba(255,255,255,.18); padding: 0 10px 0 15px; text-align: center; }
+.info strong { display: block; font-size: 2.2rem; font-weight: 900; font-style: italic; line-height: 1; }
+.info span { color: #a1a1ac; font-size: .65rem; text-transform: uppercase; letter-spacing: .09em; }
+.kerb { height: 12px; background: repeating-linear-gradient(90deg, var(--red) 0, var(--red) 35px, var(--white) 35px, var(--white) 70px); }
+
+/* 3. Grade dos pilotos */
+.container { width: min(100% - 48px, 904px); margin: 0 auto; padding: 58px 0 72px; }
+.content-section + .content-section { margin-top: 59px; }
+.section-title { display: flex; align-items: baseline; gap: 14px; font-size: 2.05rem; font-weight: 900; font-style: italic; letter-spacing: -.045em; line-height: 1.2; text-transform: uppercase; margin-bottom: 25px; }
+.section-title > span { font-size: .85rem; color: var(--red); letter-spacing: .02em; }
+.drivers { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.team-ferrari { --team: var(--ferrari); }
+.team-mclaren { --team: var(--mclaren); }
+.team-mercedes { --team: var(--mercedes); }
+.team-audi { --team: var(--audi); }
+.driver-card { background: var(--panel); border-top: 4px solid var(--team); padding: 20px 18px 18px; min-height: 155px; transition: transform .2s, background .2s; }
+.driver-card:hover { transform: translateY(-6px); background: #20202a; }
+.car-number { color: var(--team); display: block; font-size: 4.8rem; line-height: 1; font-style: italic; font-weight: 900; opacity: .38; letter-spacing: -.07em; }
+.driver-card h3 { font-size: 1.12rem; font-weight: 400; line-height: 1.2; text-transform: uppercase; white-space: nowrap; }
+.driver-card h3 strong { font-weight: 900; }
+.driver-card p { color: var(--muted); font-size: .84rem; margin-top: 2px; }
+
+/* 4. Filtros em flex e tabela */
+.filters { display: flex; align-items: flex-end; gap: 14px; margin: 0 0 16px; }
+.filter-item { display: flex; flex: 1; flex-direction: column; gap: 6px; min-width: 0; }
+.filter-item label, .form-group label { color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+input:not([type="file"]), select, textarea { width: 100%; min-height: 45px; padding: 10px 13px; color: var(--white); background: #0b0b10; border: 1px solid var(--line); outline: none; border-radius: 0; }
+input:focus, select:focus, textarea:focus { border-color: var(--red); }
+input::placeholder, textarea::placeholder { color: #666671; opacity: 1; }
+.filter-button { min-height: 45px; }
+.table-scroll { max-width: 100%; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; background: var(--panel); }
+thead { background: #1a1a22; }
+th { color: var(--muted); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; padding: 13px 16px; }
+td { padding: 13px 16px; border-bottom: 1px solid var(--line); font-size: .86rem; white-space: nowrap; }
+tbody tr { transition: background .2s; }
+tbody tr:hover { background: #24242f; }
+tbody tr.leader { background: rgba(225,6,0,.12); }
+tbody tr.leader:hover { background: rgba(225,6,0,.2); }
+.pos { display: inline-flex; align-items: center; justify-content: center; width: 29px; height: 29px; background: var(--white); color: #111; font-weight: 900; }
+.leader .pos { background: var(--red); color: var(--white); }
+.bar { display: inline-block; vertical-align: -3px; width: 4px; height: 16px; margin-right: 9px; background: var(--team); }
+.muted { color: var(--muted); font-size: .78rem; text-transform: uppercase; }
+.points { font-weight: 900; }
+
+/* 5. Ingressos: grid externo e form-grid interno */
+.tickets { display: grid; grid-template-columns: 1fr 1.6fr; align-items: start; gap: 42px; }
+.tickets-info > p:not(.ticket-alert) { color: #a0a0ab; font-size: .92rem; margin-bottom: 22px; }
+.ticket-alert { background: rgba(255,197,0,.11); color: #ffcf00; padding: 12px 16px; border-left: 4px solid #ffcf00; font-size: .84rem; font-weight: 800; margin-bottom: 11px; }
+.price-list { list-style: none; }
+.price-list li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding: 13px 0; font-size: .88rem; }
+.price-list li strong { color: var(--red); white-space: nowrap; }
+.ticket-form { border-top: 4px solid var(--red); padding: 28px; background: var(--panel); }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; }
+.form-group { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.form-group small { color: var(--muted); font-size: .72rem; }
+.form-group input[type="file"] { width: 100%; padding: 12px; color: #b9b9c1; background: #0b0b10; border: 1px dashed var(--line); font-size: .78rem; }
+.form-group textarea { min-height: 80px; resize: vertical; }
+.full { grid-column: 1 / -1; }
+.ticket-form .btn { width: 100%; }
+
+/* 6. Rodapé */
+.footer { text-align: center; color: var(--muted); font-size: .78rem; border-top: 1px solid var(--line); padding: 24px 20px; }
+.footer strong { color: #c6c6cd; font-weight: 700; }
+.footer-note { margin-top: 4px; font-size: .7rem; }
+
+/* 7. Adaptação para tablets e celulares */
+@media (max-width: 900px) {
+  .hero { align-items: flex-start; flex-direction: column; min-height: 420px; padding: 55px 5% 35px; }
+  .hero-content { align-self: flex-start; }
+  .hero h1 { font-size: clamp(3.6rem, 8vw, 5rem); }
+  .track-info { align-self: flex-end; }
+  .drivers { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .tickets { gap: 25px; }
+  .driver-card h3 { white-space: normal; }
+}
+@media (max-width: 768px) {
+  .topbar { min-height: 65px; padding-inline: 20px; }
+  .menu { display: none; }
+  .top-cta { padding-inline: 13px; font-size: .69rem; min-height: 40px; }
+  .hero { background: var(--black); min-height: auto; padding: 48px 24px 42px; gap: 32px; }
+  .hero { background: var(--black); }
+  .hero h1 { font-size: clamp(3rem, 9.5vw, 4.7rem); }
+  .hero h1 span { white-space: normal; }
+  .track-info { align-self: flex-start; justify-content: flex-start; }
+  .info:first-child { padding-left: 0; border-left: 0; }
+  .info { min-width: 85px; }
+  .info strong { font-size: 1.9rem; }
+  .container { width: min(100% - 32px, 560px); padding-top: 45px; }
+  .content-section + .content-section { margin-top: 49px; }
+  .section-title { font-size: 1.8rem; }
+  .filters { flex-direction: column; align-items: stretch; }
+  .filter-item { width: 100%; flex: auto; }
+  .filter-button { width: 100%; }
+  table { min-width: 620px; }
+  td { white-space: nowrap; }
+  .tickets { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .ticket-form { padding: 22px 18px; }
+}
+@media (max-width: 430px) {
+  .hero { padding-inline: 18px; }
+  .eyebrow { font-size: .63rem; }
+  .hero h1 { font-size: clamp(2.85rem, 10vw, 3.55rem); }
+  .hero-actions .btn { padding-inline: 13px; font-size: .69rem; }
+  .info { min-width: 0; padding-inline: 13px; }
+  .info strong { font-size: 1.65rem; }
+  .info span { font-size: .57rem; }
+  .drivers { gap: 10px; }
+  .driver-card { min-height: 145px; padding: 16px 12px; }
+  .car-number { font-size: 3.5rem; }
+  .driver-card h3 { font-size: .85rem; }
+  .driver-card p { font-size: .76rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
